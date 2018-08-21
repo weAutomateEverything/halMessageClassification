@@ -32,9 +32,7 @@ resource "aws_iam_role_policy" "halMessageClassification_pipeline_policy" {
     {
       "Effect":"Allow",
       "Action": [
-        "s3:GetObject",
-        "s3:GetObjectVersion",
-        "s3:GetBucketVersioning"
+        "s3:*"
       ],
       "Resource": [
         "${aws_s3_bucket.halMessageClassification_pipeline.arn}",
@@ -96,6 +94,7 @@ resource "aws_codepipeline" "halMessageClassification" {
   }
   stage {
     "action" {
+      input_artifacts = ["build"]
       category = "Deploy"
       name = "Deploy"
       owner = "AWS"
