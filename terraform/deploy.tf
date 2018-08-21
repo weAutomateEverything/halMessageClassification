@@ -4,7 +4,7 @@ resource "aws_codedeploy_app" "halMessageClassification" {
 }
 
 resource "aws_iam_role" "halMessageClassification_deploy" {
-  name = "halMessageClassification_deplot"
+  name = "halMessageClassification_deploy"
 
   assume_role_policy = <<EOF
 {

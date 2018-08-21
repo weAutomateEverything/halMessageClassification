@@ -98,11 +98,11 @@ resource "aws_codepipeline" "halMessageClassification" {
       category = "Deploy"
       name = "Deploy"
       owner = "AWS"
-      provider = "CodeDeploy"
+      provider = "CloudFormation"
       version = "1"
       configuration {
-        ApplicationName = "${aws_codedeploy_app.halMessageClassification.name}"
-        DeploymentGroupName = "${aws_codedeploy_deployment_group.halMessageClassification.deployment_group_name}"
+        ActionMode = "CREATE_UPDATE"
+        StackName = "halMessageClassification"
       }
     }
     name = "Deploy"
