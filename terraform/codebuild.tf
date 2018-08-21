@@ -34,6 +34,16 @@ resource "aws_iam_role_policy" "halMessageClassification_codebuild_policy" {
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ]
+    },
+    {
+      "Effect":"Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "${aws_s3_bucket.halMessageClassification_pipeline.arn}",
+        "${aws_s3_bucket.halMessageClassification_pipeline.arn}/*"
+      ]
     }
   ]
 }

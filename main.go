@@ -1,18 +1,21 @@
 package halMessageClassification
 
 import (
-	"fmt"
-	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-sdk-go/service/comprehend"
 	"github.com/aws/aws-lambda-go/events"
+	"fmt"
+	"encoding/json"
 	"os"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/service/comprehend"
-	"encoding/json"
-	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
+/*
+TextEvent Request Message
+ */
 type TextEvent struct {
 	Chat    int64  `json:"chat"`
 	Message string `json:"message"`
@@ -22,7 +25,9 @@ type store struct {
 	Event     TextEvent                      `json:"event"`
 	Languages []*comprehend.DominantLanguage `json:"languages"`
 }
-
+/*
+HandleRequest accept a TextEvent and records the response from the comprehend service into a dynamoDB
+ */
 func HandleRequest(request events.APIGatewayProxyRequest) (response events.APIGatewayProxyResponse, err error) {
 
 	fmt.Println(fmt.Sprintf("Received Body: %s", request.Body))

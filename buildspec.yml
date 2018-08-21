@@ -6,7 +6,7 @@
       # Make sure to provide a valid S3 bucket name (it must exist already).
       # The AWS CodeBuild IAM role must allow write access to it.
       S3_BUCKET: "halmessageclassification_codebuild"
-      PACKAGE: "github.com/weAutomateEverything/halMessageClassification"
+      PACKAGE: "github.com/weAutomateEverything/halmessageclassification"
 
   phases:
 
