@@ -5,7 +5,7 @@
       # This S3 bucket will be used to store the packaged Lambda deployment bundle.
       # Make sure to provide a valid S3 bucket name (it must exist already).
       # The AWS CodeBuild IAM role must allow write access to it.
-      S3_BUCKET: "halmessageclassification_codebuild"
+      S3_BUCKET: "halmessageclassification-codebuild"
       PACKAGE: "github.com/weAutomateEverything/halmessageclassification"
 
   phases:

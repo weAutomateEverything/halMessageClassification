@@ -1,3 +1,7 @@
+resource "aws_s3_bucket" "halMessageClassification_build" {
+  bucket = "halmessageclassification-codebuild"
+}
+
 resource "aws_iam_role" "halMessageClassification_codebuild" {
   name = "halmessageclassification_codebuild"
 
@@ -42,7 +46,9 @@ resource "aws_iam_role_policy" "halMessageClassification_codebuild_policy" {
       ],
       "Resource": [
         "${aws_s3_bucket.halMessageClassification_pipeline.arn}",
-        "${aws_s3_bucket.halMessageClassification_pipeline.arn}/*"
+        "${aws_s3_bucket.halMessageClassification_pipeline.arn}/*",
+        "${aws_s3_bucket.halMessageClassification_build.arn}",
+        "${aws_s3_bucket.halMessageClassification_build.arn}/*"
       ]
     }
   ]
