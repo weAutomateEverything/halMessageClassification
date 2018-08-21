@@ -28,6 +28,7 @@ resource "aws_codedeploy_deployment_group" "halMessageClassification" {
   deployment_group_name = "halMessageClassification"
   service_role_arn = "${aws_iam_role.halMessageClassification_deploy.arn}"
   deployment_config_name = "CodeDeployDefault.LambdaAllAtOnce"
+
   deployment_style {
     deployment_type = "BLUE_GREEN"
     deployment_option = "WITH_TRAFFIC_CONTROL"
