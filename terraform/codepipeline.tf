@@ -43,7 +43,10 @@ resource "aws_iam_role_policy" "halMessageClassification_pipeline_policy" {
       "Effect": "Allow",
       "Action": [
         "codebuild:BatchGetBuilds",
-        "codebuild:StartBuild"
+        "codebuild:StartBuild",
+        "cloudformation:DescribeStacks",
+        "cloudformation:CreateStack",
+        "iam:PassRole"
       ],
       "Resource": "*"
     }
@@ -98,13 +101,14 @@ resource "aws_codepipeline" "halMessageClassification" {
       category = "Deploy"
       name = "Deploy"
       owner = "AWS"
-      provider = "CloudFormation"
+      provider = "CodeDeploy"
       version = "1"
       configuration {
-        ActionMode = "CREATE_UPDATE"
-        StackName = "halMessageClassification"
+        ApplicationName = "${aws_codedeploy_deployment_group.halMessageClassification.app_name}"
+        DeploymentGroupName = "${aws_codedeploy_deployment_group.halMessageClassification.deployment_group_name}"
       }
     }
     name = "Deploy"
   }
 }
+
